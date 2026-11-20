@@ -15,9 +15,10 @@
 <meta name="twitter:title" content="StitchDoor | Doorstep Tailoring in Trivandrum">
 <meta name="twitter:description" content="Pickup, stitch, deliver in 2 days. Free pickup and delivery on your first 5 orders.">
 
-<!-- After you publish, add: <link rel="canonical" href="https://YOUR-LIVE-LINK/"> and <meta property="og:url" content="https://YOUR-LIVE-LINK/"> -->
+<link rel="canonical" href="https://7wby722nvr-dot.github.io/Stitchdoor-tailor-tvm/">
+<meta property="og:url" content="https://7wby722nvr-dot.github.io/Stitchdoor-tailor-tvm/">
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%233347C9'/%3E%3Cpath d='M14 38V21a10 10 0 0 1 20 0v17z' fill='%23fff'/%3E%3Cpath d='M24 12v26' stroke='%233347C9' stroke-width='2.2' stroke-dasharray='3.4 3.4' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='29.5' cy='29' r='2' fill='%23B9A6F0'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%233347C9'/%3E%3Cpath d='M14 38V21a10 10 0 0 1 20 0v17z' fill='%23fff'/%3E%3Cpath d='M24 12v26' stroke='%233347C9' stroke-width='2.2' stroke-dasharray='3.4 3.4' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='29.5' cy='29' r='2' fill='%23B9A6F0'/%3E%3Ccircle cx='38' cy='10' r='3' fill='%23B9A6F0'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
@@ -295,6 +296,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
 
 <script>
 (function () {
+
+/* roundRect fallback for older browsers (e.g. iOS Safari before 16) */
+if (window.CanvasRenderingContext2D && !CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+    var a = Array.isArray(r) ? r : [r];
+    var tl = a[0] || 0, tr = a.length > 1 ? a[1] : tl, br = a.length > 2 ? a[2] : tl, bl = a.length > 3 ? a[3] : tr;
+    var m = Math.min(Math.abs(w), Math.abs(h)) / 2;
+    tl = Math.min(tl, m); tr = Math.min(tr, m); br = Math.min(br, m); bl = Math.min(bl, m);
+    this.moveTo(x + tl, y);
+    this.arcTo(x + w, y, x + w, y + h, tr);
+    this.arcTo(x + w, y + h, x, y + h, br);
+    this.arcTo(x, y + h, x, y, bl);
+    this.arcTo(x, y, x + w, y, tl);
+    this.closePath();
+  };
+}
 
 const cv = document.getElementById('story');
 const c = cv.getContext('2d');
